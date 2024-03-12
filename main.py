@@ -14,7 +14,7 @@ from wtforms.validators import DataRequired
 from threading import Thread
 from functools import wraps
 def update_sas_on_db():
-    sas_on_local = {int(i.split('.')[0]) for i in os.listdir(f'{os.getcwd()}\\accounts')}
+    sas_on_local = {int(i.split('.')[0]) for i in os.listdir(f'{os.getcwd()}/accounts')}
     sas_on_db = {i['_id'] for i in dbf.get_size_map()}
     sas_not_on_db = sas_on_local - sas_on_db
     if len(sas_not_on_db) !=0:
@@ -238,7 +238,7 @@ def create_folder():
     if parent_id == 'root':
         parent_id = config.parent_id
     foldername = data['foldername']
-    sa_num = int(random.choice(os.listdir(f'{os.getcwd()}\\accounts')).split('.')[0])
+    sa_num = int(random.choice(os.listdir(f'{os.getcwd()}/accounts')).split('.')[0])
     drive = SADrive(sa_num)
     f = drive.create_folder(foldername,parent_id)
     dbf.insert_file(f,foldername,parent_id,0,'folder',sa_num,False)
